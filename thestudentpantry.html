@@ -528,7 +528,7 @@ function closeGamePopup() {
     
         resultsDiv.innerHTML = '<p>Searching YouTube for recipes...</p>';
     
-        const apiKey = 'AIzaSyDdA580dnQLxA2AOUevGffbLIV7RJZZlAc';  
+        const apiKey = '';  
         const searchQuery = `${ingredient} recipe`;
     
         const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}&maxResults=1`;
