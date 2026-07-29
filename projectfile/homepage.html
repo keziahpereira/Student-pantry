@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Student Pantry - MAD(A) Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #acbe8b 0%, #cedd97 100%);
+            color: #20441c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-weight: 400;
+        }
+
+        /* Header Section */
+        #header {
+            background-color: #486915;
+            color: #66975a;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            margin-top: 30px;
+            transform: translateY(-20px);
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        /* Animation for Header */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Logo and Title Row */
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Style for logo image */
+        #header img {
+            width: 80px; 
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #dff1d1;
+        }
+
+        #header h2 {
+            font-size: 1.5em;
+            font-weight: 300;
+            color: #c7eca9;;
+            margin-top: 10px;
+        }
+
+        /* Navbar Section */
+        #navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        #navbar a {
+            padding: 12px 20px;
+            color: #ecf1e4;
+            background-color: #375437;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+        }
+
+       
+        #navbar a:before {
+            content: "🥗";
+            margin-right: 8px;
+        }
+
+        #navbar a:hover {
+            background-color: #a4698c;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navbar Title */
+        #navbar h3 {
+            width: 100%;
+            text-align: center;
+            color: #1e391e;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            font-weight: 500;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            width: 100%;
+            background-color: #486915;
+            color: #d3edbd;;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+        }
+
+        footer p {
+            font-weight: 400;
+        }
+
+        /*  Design */
+        @media (max-width: 768px) {
+            #header h1 {
+                font-size: 2em;
+            }
+
+            #header h2 {
+                font-size: 1.2em;
+            }
+
+            #navbar {
+                flex-direction: column;
+            }
+
+            #navbar a {
+                width: 80%;
+                text-align: center;
+            }
+
+            .logo-title {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div id="header">
+        <div class="logo-title">
+            <img src="logo2.png" alt="The Student Pantry Logo">
+            <h1>The Student Pantry</h1>
+        </div>
+        <h2>MAD(A) Project Homepage</h2>
+    </div>
+
+    <!-- Navigation Bar (Weeks) -->
+    <div id="navbar">
+        <h3>Weeks</h3>
+        <a href="week1.html">Week 1</a>
+        <a href="week2.html">Week 2</a>
+        <a href="week3.html">Week 3</a>
+        <a href="week5.html">Week 5</a>
+        <a href="week7.html">Week 7</a>
+        <a href="week8.html">Week 8</a>
+        <a href="week9.html">Week 9</a>
+        <a href="week11.html">Week11</a>
+        <a href="moodboard.html">Moodboard</a>
+        
+        
+    
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Student Number: 2791720P <br> MAD(A) - Final Project</p>
+    </footer>
+</body>
+</html>

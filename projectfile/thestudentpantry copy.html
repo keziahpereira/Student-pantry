@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Student Pantry - Recipe Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #486915;
+            color: #20441c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .navbar {
+            width: 100%;
+            background: #20441c;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: #f3f7cd;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #d1b537;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .title-container img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #f3f7cd;
+        }
+
+        .generator-container {
+            background: linear-gradient(135deg, #72934c 0%, #f4eea0 100%);
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .ingredient-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .ingredient-chip {
+            background-color: #d1b537;
+            color: #f4efd4;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+        }
+
+        .delete-btn {
+            background-color: #433610;
+            color: #f4f1b8;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        input {
+            width: 80%;
+            padding: 15px;
+            margin: 0 10px;
+            border: 2px solid #a7bd73;
+            border-radius: 50px;
+            font-size: 1.2em;
+            max-width: 400px;
+            background-color: #c8d07e;
+            color: #0a430c;
+        }
+
+        input:focus {
+            border-color: #486915;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #0a430c;
+            font-style: italic;
+        }
+
+        button {
+            background-color: #d1b537;
+            color: #e6ebaf;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6e691e;
+        }
+    </style>
+</head>
+<body>
+     <div class="navbar">
+        <a href="#">About</a>
+        <a href="#">Wait Game</a>
+        <a href="studentchat.html">Student Chat</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <div class="main-container">
+        <div class="title-container">
+            <img src="logo2 copy.png" alt="The Student Pantry Logo">
+            <h1>The Student Pantry</h1>
+        </div>
+        
+        <div class="generator-container">
+            <input type="text" id="ingredientInput" placeholder="Type ingredient and press Enter">
+            <button onclick="redirectToResults()">Find Recipe</button>
+        </div>
+
+        <div class="ingredient-container" id="ingredientContainer"></div>
+    </div>
+
+    <script>
+        document.getElementById("ingredientInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                let inputValue = document.getElementById("ingredientInput").value.trim();
+
+                if (inputValue) {
+                    let ingredientContainer = document.getElementById("ingredientContainer");
+                    let chip = document.createElement("div");
+                    chip.classList.add("ingredient-chip");
+                    chip.textContent = inputValue;
+
+                    let deleteBtn = document.createElement("button");
+                    deleteBtn.classList.add("delete-btn");
+                    deleteBtn.textContent = "X";
+                    deleteBtn.onclick = function() {
+                        ingredientContainer.removeChild(chip);
+                    };
+
+                    chip.appendChild(deleteBtn);
+                    ingredientContainer.appendChild(chip);
+                    document.getElementById("ingredientInput").value = "";
+                }
+            }
+        });
+
+        function redirectToResults() {
+            let ingredientChips = document.querySelectorAll(".ingredient-chip");
+            let ingredients = [];
+
+            ingredientChips.forEach(chip => {
+                let ingredientName = chip.firstChild.textContent.trim();
+                ingredients.push(ingredientName);
+            });
+
+            if (ingredients.length > 0) {
+                let query = encodeURIComponent(ingredients.join("+"));
+                window.location.href = `results.html?ingredients=${query}`;
+
+            } else {
+                alert("Please enter at least one ingredient.");
+            }
+        }
+    </script>
+</body>
+</html>

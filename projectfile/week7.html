@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Student Pantry - Week 7 Tasks</title>
+    
+    <!-- Google Font for Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Styling with homepage colors -->
+    <style>
+        navbar {
+    background-color: #6a9231; 
+    color: #fff; 
+}
+        
+        
+nav {
+  background-color: #6a9231; 
+  color: white; 
+  overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+}
+
+nav a {
+            display: inline-block;
+            color: #daeac7;
+            padding: 20px 40px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+nav a:hover {
+  color: #375e29; 
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2a401b;
+            color: #444941;
+        }
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+            color: #d2e2bc;
+            margin: 0;
+        }
+        a {
+            text-decoration: none;
+            color: #b1e19e;
+        }
+
+        header {
+            background-color:  #486915;
+            color: #9ada72;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: #526e37;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #702d4a;
+            margin-bottom: 15px;
+        }
+
+        .section p, .section ul, .section ol {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .section ul, .section ol {
+            padding-left: 20px;
+        }
+
+        .section ul li, .section ol li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #222c15;
+            color: #f6f6f6;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9em;
+        }
+        
+/* Styling for Task 2 Analysis Section */
+.analysis-list {
+    list-style-type: decimal;
+    padding-left: 20px;
+    line-height: 1.8;
+    margin-top: 20px;
+    text-align: left; 
+}
+
+.analysis-list h3 {
+    font-size: 1.5rem;
+    color: #702d4a; 
+    margin-bottom: 10px;
+    text-align: left; 
+}
+
+.analysis-list ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+    text-align: left; 
+}
+
+.analysis-list li {
+    margin-bottom: 15px;
+    text-align: left; 
+}
+
+.analysis-list ul li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+    text-align: left; 
+}
+
+.analysis-list p {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+        .moodboard-btn {
+    background-color: #84dca6; 
+    color: #222c15; 
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    margin: 20px auto; 
+}
+
+.moodboard-btn:hover {
+    background-color: #6cb489; 
+    color: #ffffff; 
+}
+
+.section {
+    padding: 40px 20px;
+    background-color: #dae6cd;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #dae6b7;
+    margin-bottom: 30px;
+}
+
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+
+.image-item {
+    background-color: #e6ebdd;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.image-item:hover {
+    transform: translateY(-5px);
+}
+
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+
+figcaption {
+    font-size: 1rem;
+    color: #555;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+ul li strong {
+    color: #000;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+strong {
+    color: #333;
+}
+
+
+@media (max-width: 768px) {
+    .image-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-item {
+        max-width: 90%;
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Week7: Images</h1>
+        
+    </header>
+
+    <!-- Navigation Bar -->
+   <nav aria-label="Weekly Navigation">
+    <a href="homepage.html" aria-label="homepage">homepage</a>
+    <a href="week1.html" aria-label="Week 1">Week 1</a>
+    <a href="week2.html" aria-label="Week 2">Week 2</a>
+    <a href="week3.html" aria-label="Week 3">Week 3</a>
+    <a href="week5.html" aria-label="Week 5">Week 5</a>
+    <a href="week7.html" aria-label="Week 7">Week 7</a>
+    <a href="moodboard.html" aria-label="Moodboard">Moodboard</a>
+    <a href="week8.html" aria-label="Week 8">Week 8</a>
+    <a href="week9.html" aria-label="Week 9">Week 9</a>
+    <a href="week11.html" aria-label="Week 11">Week 11</a>
+</nav>
+
+    <!-- Main content -->
+    <div class="container">
+        
+        <!-- Section 3 -->
+        <section class="section">
+            <h2>Task 1: Reflection</h2>
+            <p><strong>I really enjoyed the class on visual design, storytelling, and getting the right message across. It helped me understand how to present my website better, especially how important it is to set the right tone with things like colour, images, and even background music. It got me thinking about the purpose of my website, who I want to reach, and how to balance entertainment, education, and info. I’ve realised that creating an engaging website is more than just sharing facts—it's about telling a story, organizing content, and connecting with people. I’ve also learned how design elements like navigation, layout, and visual hierarchy can make everything flow more naturally. Overall, the past weeks' information has shown me how to think about what the audience needs and use design to solve problems and tell stories.</strong></p>
+        </section>
+        
+
+        <div class="section">
+            <h2>Image Gallery</h2>
+            <div class="image-grid">
+                <figure class="image-item">
+                    <img src="pic1.png" alt="Image 1">
+                    <figcaption>
+                        <h3>Purpose of Images:</h3>
+                        <ul>
+                            <li><strong>Propaganda:</strong> The site doesn’t use images for propaganda, but focuses on connecting users to recipes.</li>
+                            <li><strong>Advertising:</strong> Subtle use of food photos to encourage recipe exploration.</li>
+                            <li><strong>Clickbait:</strong> Avoids clickbait tactics, though appealing images may encourage curiosity.</li>
+                            <li><strong>Aesthetics:</strong> Enhances the visual appeal by aligning with the culinary theme.</li>
+                        </ul>
+                        <p><strong>Key Takeaways:</strong> The dish images really enhanced comprehension and showed users the final product. The vibrant and fresh color schemes also stood out.</p>
+                        <p><strong>Kinds of Images Used:</strong> Raster images (JPEGs or PNGs) for food photography and vector graphics for icons.</p>
+                    </figcaption>
+                </figure>
+                
+                <figure class="image-item">
+                    <img src="pic2.png" alt="Image 2">
+                    <figcaption>
+                        <h3>Purpose of the Images:</h3>
+                        <p>The images primarily serve advertising and aesthetic purposes, showcasing the AI-driven recipe generator.</p>
+                        <p><strong>Evidence of Intentional Image Use:</strong> Food photos generated by AI to represent the recipes, making the content more engaging and helping retention.</p>
+                        <p><strong>Key Takeaway:</strong> The website layout and meal planning section were insightful, especially the color schemes and design theories.</p>
+                    </figcaption>
+                </figure>
+                
+                <figure class="image-item">
+                    <img src="pic3.png" alt="Image 3">
+                    <figcaption>
+                        <h3>Purpose of Images:</h3>
+                        <ul>
+                            <li><strong>Propaganda:</strong> Focuses on practicality rather than propaganda.</li>
+                            <li><strong>Advertising:</strong> Subtly uses food photography to encourage product purchases.</li>
+                            <li><strong>Clickbait:</strong> Avoids misleading tactics, with images related to recipes.</li>
+                            <li><strong>Aesthetics:</strong> I didn’t find it very appealing due to the lack of color.</li>
+                        </ul>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+        
+        
+
+
+        
+
+
+<!-- Section 4 -->
+<section class="section">
+    <h2>Task 2: Analysis of Food Generators</h2>
+    <p>All three generators (Supercook, DishGen, and Tesco) utilize high-quality, appealing food imagery to engage users. These images help increase user engagement and enhance information retention. Visually attractive food photos are strategically used to show the results of recipes, which helps users visualize the end product.</p>
+
+    <div class="content-wrapper">
+        <ol class="analysis-list">
+        
+            <li>
+                <h3>1. Alignment with Website Purpose</h3>
+                <ul class="alignment-list">
+                    <li><strong>Supercook:</strong> Focuses on practical meal creation by leveraging user-inputted ingredients. Images support the idea of making cooking with limited ingredients more achievable.</li>
+                    <li><strong>DishGen:</strong> Aligns its imagery with the AI-powered recipe generator concept, appealing to businesses by showcasing AI-generated food images that could be used for product promotions or marketing.</li>
+                    <li><strong>Tesco:</strong> Uses food images to inspire users and highlight meal-planning features while subtly promoting products available in its stores, aligning with its goal of making meal planning more convenient and driving in-store purchases.</li>
+                </ul>
+            </li>
+
+     
+            <li>
+                <h3>2. Types of Images</h3>
+                <p>All three websites use raster images of food, as they provide realistic and appetizing visuals. The choice of raster images is deliberate, as they show the actual outcome of recipes and serve to guide users visually.</p>
+            </li>
+
+           
+            <li>
+                <h3>3. Intentional Image Use for Marketing and Functionality</h3>
+                <p>Images on these platforms aren't just aesthetic—they serve a functional purpose. They enhance information comprehension by showing users exactly what they can expect from the recipe. This is important for retention, as users are more likely to engage with content that visually represents their potential outcome. For example, Tesco’s use of food photography is closely tied to their product offerings.</p>
+            </li>
+
+       
+            <li>
+                <h3>4. Practical and User-Friendly Design</h3>
+                <p>Each platform employs images thoughtfully to enhance the user experience:</p>
+                <ul>
+                    <li><strong>Supercook:</strong> Uses images to help users understand what meals they can make with their available ingredients.</li>
+                    <li><strong>DishGen:</strong> Showcases the potential of AI-generated recipes for marketing.</li>
+                    <li><strong>Tesco:</strong> While the food photography is effective, the overall layout could be improved for a better user experience.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <p><strong>Key takeaway:</strong> The use of high-quality food imagery is a consistent strategy across all three websites, aimed at increasing user engagement and supporting the websites' goals.</p>
+</section>
+
+
+    <!-- Mood Board Button -->
+    <div class="section">
+        <button class="moodboard-btn" onclick="location.href='moodboard.html'">Moodboard</button>
+    </div>
+
+        
+        <div class="section">
+            <h2>Editing Digital Images</h2>
+            <div class="image-grid">
+                <figure>
+                    <img src="pic6rgb600.jpg" alt="RGB 600PX 50ppi">
+                    <figcaption>RGB 600PX 50ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6greyscale600.jpg" alt="Greyscale 600PX 50ppi">
+                    <figcaption>Greyscale 600PX 50ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6indexed600.jpg" alt="Indexed 600PX 50ppi">
+                    <figcaption>Indexed 600PX 50ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6rgb.jpg" alt="RGB 800PX 72ppi">
+                    <figcaption>RGB 800PX 72ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6greyscale.jpg" alt="Greyscale 800PX 72ppi">
+                    <figcaption>Greyscale 800PX 72ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6indexed.jpg" alt="Indexed 800PX 72ppi">
+                    <figcaption>Indexed 800PX 72ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6rgb1000.jpg" alt="RGB 1000PX 90ppi">
+                    <figcaption>RGB 1000PX 90ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6greyscale1000.jpg" alt="Greyscale 1000PX 90ppi">
+                    <figcaption>Greyscale 1000PX 90ppi</figcaption>
+                </figure>
+                <figure>
+                    <img src="pic6indexed1000.jpg" alt="Indexed 1000PX 90ppi">
+                    <figcaption>Indexed 1000PX 90ppi</figcaption>
+                </figure>
+            </div>
+        </div>
+        
+        
+        <style>
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 15px; 
+                margin-top: 20px;
+            }
+        
+            .image-grid figure {
+                margin: 0;
+                text-align: center; 
+            }
+        
+            .image-grid img {
+                width: 100%; 
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+        
+            .image-grid img:hover {
+                transform: scale(1.05); 
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+        
+            .image-grid figcaption {
+                margin-top: 10px;
+                font-size: 0.9em;
+                color: #555;
+            }
+        </style>
+        
+
+        <!-- Analysis Section -->
+        <div class="section">
+            <h2>Analysis</h2>
+            <p>In my opinion, optimising images brings many benefits, such as faster loading times, reduced bandwidth usage, and a better overall experience for users. However, these advantages often come at the cost of visual quality, particularly in terms of colour and resolution. I think when it comes to image formats, RGB is by far the superior option for high-quality content, especially when engaging visuals are the goal. Greyscale images are useful when the intention is to emphasise simplicity or artistic elements, while indexed images, though more efficient, fall short in terms of visual appeal. For my project, I believe using RGB images at 800px with 72ppi and 1000px with 90ppi strikes the best balance between image quality and web page loading speed. 
+
+            </p>
+            
+        </div>
+    </div>
+
+        
+         
+
+    <!-- Footer -->
+    <footer>
+        <div id="menu">
+            <a href="homepage.html">Homepage</a>
+        </div>
+        <p>Student Number: 2791720P</p>
+    </footer>
+
+</body>
+</html>

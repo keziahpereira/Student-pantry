@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodboard Example</title>
+    <style>
+        nav {
+            background-color: #486915;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+    
+        nav a {
+            display: inline-block;
+            color: #daeac7;
+            padding: 20px 30px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* This removes the underline from the links */
+        }
+    
+        nav a:hover {
+            background-color: #6a9231;
+            color: #222c15;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav aria-label="Weekly Navigation">
+            <a href="homepage.html" aria-label="homepage">homepage</a>
+            <a href="week1.html" aria-label="Week 1">Week 1</a>
+            <a href="week2.html" aria-label="Week 2">Week 2</a>
+            <a href="week3.html" aria-label="Week 3">Week 3</a>
+            <a href="week5.html" aria-label="Week 5">Week 5</a>
+            <a href="week7.html" aria-label="Week 7">Week 7</a>
+            <a href="moodboard.html" aria-label="Moodboard">Moodboard</a>
+            <a href="week8.html" aria-label="Week 8">Week 8</a>
+            <a href="week9.html" aria-label="Week 9">Week 9</a>
+            <a href="week11.html" aria-label="Week 11">Week 11</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="mood-board">
+            <h2>My Mood Board</h2>
+            <iframe width="1500" height="1000" src="https://miro.com/app/live-embed/uXjVL_b1be0=/?moveToViewport=-10275,-7391,19810,11333&embedId=869008257732" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+        </div>
+    </main>
+</body>
+</html>

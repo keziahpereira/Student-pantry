@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11 - The Student Pantry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #dee6c8;
+            color: #333;
+        }
+
+        header {
+            background-color:#486915;
+            color: #e3ecdd;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #486915;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+    
+        nav a {
+            display: inline-block;
+            color: #daeac7;
+            padding: 20px 30px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+    
+        nav a:hover {
+            background-color: #6a9231;
+            color: #222c15;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background-color: #e1e6d2;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .screenshot-container {
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        footer {
+            background-color: #486915;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Week 11 - Accessibility</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="homepage.html" aria-label="homepage">homepage</a>
+        <a href="week1.html">Week 1</a>
+        <a href="week2.html">Week 2</a>
+        <a href="week3.html">Week 3</a>
+        <a href="week5.html">Week 5</a>
+        <a href="week7.html">Week 7</a>
+        <a href="moodboard.html">Moodboard</a>
+        <a href="week8.html">Week 8</a>
+        <a href="week9.html">Week 9</a>
+        <a href="week11.html">Week 11</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <section class="section">
+            <h3>WebAIM Million Accessibility Study Context</h3>
+            <p>According to the WebAIM Million Accessibility Study, nearly 98% of websites fail to meet the WCAG standards. BBC Good Food, being a prominent site, does a better job than most by addressing key accessibility issues, but it still needs improvement in some areas like color contrast, form labeling, and image descriptions.</p>
+        </section>
+
+        <section class="section">
+            <h3>WAVE Accessibility Evaluation Report for BBC Good Food</h3>
+            <p>The WAVE tool detected several important accessibility aspects:</p>
+            <h4>Errors:</h4>
+            <p><strong>0 Errors:</strong> The website passed all major checks for critical issues that could hinder access to content for users with disabilities, such as missing form labels or improper use of semantic HTML elements. This suggests that the core functionality of the site is accessible to assistive technologies.</p>
+            <h4>Color Contrast:</h4>
+            <p><strong>0 Contrast Errors:</strong> No issues were found with color contrast between text and background elements. This is a positive finding as it ensures that text is legible for users with low vision or color blindness, meeting the WCAG (Web Content Accessibility Guidelines) contrast requirements.</p>
+            <h4>Alerts:</h4>
+            <p><strong>190 Alerts:</strong> These alerts represent potential accessibility issues that are not immediately critical but may still affect the user experience. Alerts could indicate missing alternative text for images, unlabelled interactive elements, or issues with HTML structure. While not urgent, these should be reviewed and addressed to enhance accessibility.</p>
+            <h4>Features:</h4>
+            <p><strong>42 Features:</strong> This indicates that the website includes a range of accessibility-related features, such as proper heading structures, accessible forms, and roles for interactive elements. These features are essential for improving navigation and usability for people with disabilities.</p>
+            <h4>Elements:</h4>
+            <p><strong>79 Elements:</strong> The site contains 79 interactive elements (e.g., links, buttons, forms) that have been assessed for accessibility. Ensuring these elements are properly coded and accessible is crucial for users who rely on keyboard navigation or screen readers.</p>
+            <h4>ARIA (Accessible Rich Internet Applications):</h4>
+            <p><strong>549 ARIA Attributes:</strong> The site uses ARIA attributes extensively, which are designed to enhance accessibility, particularly for dynamic content and complex user interfaces. However, it's important to verify that these attributes are correctly implemented to avoid potential confusion for assistive technologies.</p>
+            <h4>Conclusion:</h4>
+            <p>Overall, the BBC Good Food website performs well in terms of basic accessibility, with no critical errors or contrast issues detected. However, there are a significant number of alerts (190), indicating areas that require attention to further improve usability for all users, particularly those with disabilities.</p>
+
+            <!-- Screenshot Container -->
+            <div class="screenshot-container">
+                <img src="week11waveoverviewreport.png" alt="Screenshot of WAVE Overview Report" width="100%" />
+            </div>
+        </section>
+
+        
+
+        <section class="section">
+            <h3>WebAIM Contrast Checker Findings</h3>
+            <p>Foreground and background color combinations were analyzed for compliance with WCAG standards:</p>
+            <ul>
+                
+                <li>The BBC Good Food website passed all the WCAG AA standards, so it meets the basic accessibility requirements for most users. However, it didn't meet the WCAG AAA standards, which are more stringent and focus on making websites fully accessible to everyone, including people with more specific needs. This means that while the site is generally accessible, there are areas where it could be improved to make it even more user-friendly for people with things like cognitive disabilities or more personalized accessibility needs.</li>
+            </ul>
+            <!-- Screenshot Container -->
+            <div class="screenshot-container"><img src="Week11contrastchecker.png" alt="Screenshot of Contrast Checker" width="100%" /><p>Screenshot Placeholder for Contrast Checker Results</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>Readability Test Tool</h3>
+            <p>The BBC Good Food website's text was evaluated for readability. It scored:</p>
+            <ul>
+                
+                <li>I ran a readability test on the BBC Good Food website, and the result came out to 65.5%. This means that the content is fairly easy to read for most users, but there’s still room for improvement. The score suggests that while the text is understandable for general audiences, some sections might be a bit challenging for people with lower reading levels or for those who prefer simpler language</li>
+            </ul>
+            <!-- Screenshot Container -->
+            <div class="screenshot-container">
+                <img src="Week11readability.png" alt="Screenshot of Readability review" width="100%" />
+            </div>
+        </section>
+        <section class="section">
+            <h3>Reflection on Accessibility in My Own Website Design</h3>
+            <p>As I begin the process of designing my website, one of my main focuses is ensuring that it's accessible to all users, regardless of their abilities. Accessibility is crucial in making sure that people with disabilities—whether visual, auditory, motor, or cognitive—can navigate and interact with the website with ease. To help guide this process, I’ve been exploring accessibility tools like WAVE (Web Accessibility Evaluation Tool) and readability features on websites like BBC Good Food. The BBC Good Food site has been a great reference for understanding how accessibility can be effectively integrated into a user-friendly design.
+
+                By using WAVE and readability tools, I’ve been able to see how things like text contrast, image alt texts, and proper heading structures contribute to better accessibility. For example, BBC Good Food’s use of high-contrast text and alt text for images made me realize the importance of these elements in ensuring clarity and engagement. These tools have also helped me identify potential issues that could be overlooked, like missing alt text or poor color contrast, which I now know to address in my own design. I plan to include features like alternative text for images, keyboard navigability, high-contrast color schemes for visibility, and captions for videos to ensure that everyone can engage with the content effectively. Additionally, I will focus on providing a clear, intuitive layout with simple navigation, ensuring users don't feel lost or overwhelmed.
+                
+                Reflecting on the accessibility tools and features of websites like BBC Good Food has given me a solid foundation for making my website more inclusive. It’s a process that will involve continuous learning and adjustments as I go, but it's an essential part of creating a user-friendly and welcoming online experience for a wide range of users.</p>
+            
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p> 2791720P MAD Final project</p>
+    </footer>
+
+
+</body>
+</html>
