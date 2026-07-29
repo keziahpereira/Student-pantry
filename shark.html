@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Word Search</title>
+    <style>
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f9f8f0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars on the body */
+            height: 100%; /* Make sure the body takes up the full viewport height */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #e67e22;
+            margin-top: 2px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        p1 {
+            font-size: 2em;
+            font-weight: bold;
+            color: #45502c;
+        }
+
+
+        p {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        #wordsLeft {
+            margin-top: 10px;
+            color: #16a085;
+            font-size: 1.5em;
+        }
+
+        #gridContainer {
+            position: relative;
+            margin-top: 2px;
+            display: inline-block;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        td {
+            width: 50px; /* Slightly smaller cells */
+            height: 35px; /* Slightly smaller cells */
+            text-align: center;
+            border: 1px solid #5c731c;
+            font-weight: bold;
+            font-size: 16px; /* Slightly smaller font */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            position: relative;
+            z-index: 2;
+            padding: 5px; /* Add some padding to ensure letters fit nicely */
+        }
+
+        td:hover {
+            background-color: rgba(241, 196, 15, 0.3);
+            transform: scale(1.1);
+        }
+
+        .found {
+            background-color: #9ec265 !important;
+            color: #fff;
+        }
+
+        #congratulationsMessage {
+            display: none;
+            font-size: 1.5em;
+            color: #88963b;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .message span {
+            font-size: 1.4em;
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body style="margin: 0; height: 100%;"> <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 10px;">
+        <h1>🍝 Recipe Word Search: Spaghetti Bolognese 🍅 </h1>
+        <p1>Find the ingredients!</p1>
+        <p id="wordsLeft">Words left to find: <span id="remainingCount"></span></p>
+        <h2 id="congratulationsMessage">🎉 Congratulations! You've found all the words! 🎉</h2>
+        <div id="gridContainer">
+            <table id="wordSearchGrid"></table>
+        </div>
+    </div>
+
+    <script>
+        const recipes = {
+            "Spaghetti Bolognese": ["TOMATO", "BEEF", "ONION", "GARLIC", "OLIVEOIL", "CARROT", "CELERY", "PASTA"],
+        };
+
+        const selectedRecipe = "Spaghetti Bolognese";
+        let ingredients = [...recipes[selectedRecipe]];
+        let wordsFound = [];
+        const gridSize = 10; // Make the grid slightly smaller
+        let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(" "));
+
+        function canPlaceWord(grid, word, row, col, direction) {
+            if (direction === "H" && col + word.length > gridSize) return false;
+            if (direction === "V" && row + word.length > gridSize) return false;
+            if (direction === "D" && (row + word.length > gridSize || col + word.length > gridSize)) return false;
+
+            for (let i = 0; i < word.length; i++) {
+                let r = direction === "H" ? row : direction === "D" ? row + i : row + i;
+                let c = direction === "H" ? col + i : direction === "D" ? col + i : col;
+                if (grid[r][c] !== " " && grid[r][c] !== word[i]) return false;
+            }
+            return true;
+        }
+
+        function placeWord(grid, word) {
+            let placed = false;
+            while (!placed) {
+                let row = Math.floor(Math.random() * gridSize);
+                let col = Math.floor(Math.random() * gridSize);
+                let direction = ["H", "V", "D"][Math.floor(Math.random() * 3)];
+
+                if (canPlaceWord(grid, word, row, col, direction)) {
+                    for (let i = 0; i < word.length; i++) {
+                        let r = direction === "H" ? row : direction === "D" ? row + i : row + i;
+                        let c = direction === "H" ? col + i : direction === "D" ? col + i : col;
+                        grid[r][c] = word[i];
+                    }
+                    placed = true;
+                }
+            }
+        }
+
+        ingredients.forEach(word => placeWord(grid, word));
+
+        function fillEmptySpaces(grid) {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    if (grid[row][col] === " ") {
+                        grid[row][col] = letters[Math.floor(Math.random() * letters.length)];
+                    }
+                }
+            }
+        }
+
+        fillEmptySpaces(grid);
+
+        const table = document.getElementById("wordSearchGrid");
+        let selecting = false;
+        let selectedCells = [];
+        let startCell = null;
+        let startRow, startCol;
+
+        function updateRemainingWords() {
+            document.getElementById("remainingCount").textContent = ingredients.length;
+            if (ingredients.length === 0) {
+                document.getElementById("congratulationsMessage").style.display = "block";
+            }
+        }
+
+        function getCellPosition(cell) {
+            let row = cell.parentElement.rowIndex;
+            let col = cell.cellIndex;
+            return { row, col };
+        }
+
+        function isStraightLine(start, end) {
+            return (
+                start.row === end.row ||
+                start.col === end.col ||
+                Math.abs(start.row - end.row) === Math.abs(start.col - end.col)
+            );
+        }
+
+        table.addEventListener("mousedown", function (event) {
+            if (event.target.tagName !== "TD") return;
+            selecting = true;
+            selectedCells = [event.target];
+            startCell = event.target;
+            let pos = getCellPosition(startCell);
+            startRow = pos.row;
+            startCol = pos.col;
+            event.target.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+        });
+
+        table.addEventListener("mouseover", function (event) {
+            if (!selecting || event.target.tagName !== "TD") return;
+
+            let pos = getCellPosition(event.target);
+            let startPos = { row: startRow, col: startCol };
+
+            if (!isStraightLine(startPos, pos)) return;
+
+            if (!selectedCells.includes(event.target)) {
+                selectedCells.push(event.target);
+                event.target.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+            }
+        });
+
+        table.addEventListener("mouseup", function () {
+            if (selecting) {
+                let selectedWord = selectedCells.map(td => td.textContent).join("");
+                if (ingredients.includes(selectedWord)) {
+                    selectedCells.forEach(td => td.classList.add("found"));
+                    wordsFound.push(selectedWord);
+                    ingredients = ingredients.filter(word => word !== selectedWord);
+                    updateRemainingWords();
+                }
+                selectedCells.forEach(td => td.style.backgroundColor = "");
+                selectedCells = [];
+                startCell = null;
+            }
+            selecting = false;
+        });
+
+        table.addEventListener("mouseleave", function () {
+            if (selecting) {
+                selecting = false;
+                selectedCells.forEach(td => td.style.backgroundColor = "");
+                selectedCells = [];
+            }
+        });
+
+        grid.forEach(row => {
+            let tr = document.createElement("tr");
+            row.forEach(cell => {
+                let td = document.createElement("td");
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            table.appendChild(tr);
+        });
+
+        updateRemainingWords();
+    </script>
+</body>
+</html>

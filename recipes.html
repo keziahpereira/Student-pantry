@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Recipes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+
+ .hamburger {
+    position: fixed;
+    top: 30px;
+    left: 10px;
+    font-size: 3.5em;
+    z-index: 1000; 
+    background: none;
+    border: none;
+    color: white;
+    margin: 0; 
+    padding: 0; 
+}
+.nav-menu {
+    position: absolute;
+    top: 70px; 
+    left: 10px;
+    z-index: 1000;
+    background: #506029;  
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    border-radius: 10px;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    width: 280px; 
+}
+
+.nav-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-menu a {
+    color: #f0f8f0; 
+    text-decoration: none; 
+    padding: 10px 0;
+    font-size: 1.1em; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+
+.nav-menu a:last-child {
+    border-bottom: none; 
+}
+
+.nav-menu a:hover {
+    opacity: 0.8; 
+}
+.nav-menu a.active-link {
+    background-color: #e1e07f; 
+    color: #364908; 
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 8px 10px;
+}
+
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;  
+             min-height: 400px;  
+            height: 200vh;
+            width: 100%;
+            margin-top: 2200px;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #e6ebde;
+        }
+
+        .generator-container {
+            background: rgba(218, 226, 185, 0.8);
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 80%;
+            padding: 15px;
+            border: 2px solid #d9e2c7;
+            border-radius: 50px;
+            font-size: 1.2em;
+            max-width: 400px;
+            background-color: #e9ebd0;
+            color: #0a430c;
+        }
+
+        button {
+            background-color: #586027;
+            color: #ecece4;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6e691e;
+        }
+
+
+    
+
+
+        #recipeHeader {
+    background-image: url('generator 2.jpg');
+    background-size: cover;
+    background-position: top; 
+    color: white;
+    text-align: center;
+    padding: 60px 40px;
+    margin-bottom: 0px;
+}
+
+
+.top-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),url('generator 2.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px 80px 20px; 
+    text-align: center;
+    color: #fff; 
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+    position: relative;
+    overflow: hidden;
+}
+@media (max-width: 768px) {
+    .top-section {
+        border-bottom-left-radius: 50% 10%;
+        border-bottom-right-radius: 50% 10%;
+    }
+}
+
+.top-section h2 {
+            font-size: 2.5em;
+            color: #ebf2eb;
+            margin-bottom: 20px;
+        }
+
+        .top-section p {
+            font-size: 1.1em;
+            color: #444;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:rgb(200, 214, 180);
+}
+
+
+
+#recipeNavbar {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin-top: 40px;        
+}
+
+#recipeNavbar ul {
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    flex-wrap: wrap;         
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#recipeNavbar li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+/* Container for buttons to center them */
+.button-container {
+    display: flex;
+    flex-direction: column;  
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;          
+}
+
+.nav-btn {
+    background-color: #353916;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 10px 25px; 
+    border-radius: 50px; 
+    margin: 10px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.nav-btn:hover {
+    background-color: #4b511f;
+    text-decoration: none;
+}
+
+
+
+/* Recipe Cards */
+#quickRecipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.recipe-card {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.recipe-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.recipe-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.recipe-card p {
+    font-size: 14px;
+    color: #777;
+}
+
+.recipe-card:hover {
+    transform: scale(1.05);
+}
+
+/* Hide recipes that don’t match the filter */
+.recipe-card.hidden {
+    display: none;
+}
+
+/* Game Popup Styles */
+#gamePopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 800px;
+  height: 100vh;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+  padding: 0;
+}
+/* Optional: make text and images fit nicely */
+.button-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.button-text {
+  padding: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+    .button-item {
+        width: 100%;
+    }
+}
+
+.game-float-button {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.circle-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #4d2c6d; /* Purple */
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.circle-icon:hover {
+    transform: scale(1.1);
+    background-color: #4d2c6d; /* Purple */
+}
+
+
+/* Ensure the header stays on top of everything else */
+#recipeHeader {
+    z-index: 999;  
+}
+
+
+/* Close Button Bar */
+.close-btn-bar {
+  display: flex;
+  justify-content: flex-end;
+  background: #364908;
+  padding: 10px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.close-btn-bar button {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Iframe for Game */
+.game-iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    #gameCanvas {
+        width: 60%;
+        height: auto;
+    }
+}
+
+.food-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.food-item {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.food-item.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #706c1d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #63620c;
+}
+
+/* Floating game button */
+.game-float-button {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+}
+
+/* Circular purple icon style */
+.circle-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #4d2c6d; /* Purple background */
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+/* Hover effect for the icon */
+.circle-icon:hover {
+    transform: scale(1.1);
+    background-color: #4d2c6d; 
+}
+
+/* Game Popup Styles */
+#gamePopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 800px;
+  height: 100vh;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Close Button Bar */
+.close-btn-bar {
+  display: flex;
+  justify-content: flex-end;
+  background: #364908;
+  padding: 10px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.close-btn-bar button {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Iframe for Game */
+.game-iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    #gameCanvas {
+        width: 60%;
+        height: auto;
+    }
+}
+
+</style>
+
+
+<body>
+    <div class="background-overlay"></div> <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <div class="nav-menu" id="navMenu">
+        <a href="about.html">Homepage</a>
+        <a href="recipes.html" class="active-link">Quick Recipes</a>
+        <a href="thestudentpantry.html">Recipe Generate</a>
+        <a href="studentnotepad.html">Meal Planner</a>
+        <a href="studentchat.html">Student Chat</a>
+       
+    </div>
+    <button id="waitGameButton" class="game-float-button" onclick="openGamePopup()">
+        <img src="game1.png" alt="Play Game" class="circle-icon">
+    </button>
+    
+    <button id="waitGameButton" class="game-float-button" onclick="openGamePopup()">
+        <img src="game1.png" alt="Play Game" class="circle-icon">
+    </button>
+    
+    
+    
+    
+    <div id="gamePopup">
+        <div class="close-btn-bar">
+          <button onclick="closeGamePopup()">✖</button>
+        </div>
+    
+        <iframe src="shark.html" class="game-iframe"></iframe>
+      </div>
+    
+    <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;" onclick="closeGamePopup()"></div>
+    
+    
+    <!-- Header Section -->
+    <div class="recipes page">
+        <section class="top-section">
+            <h2>The Student Pantry</h2>
+            
+            </section>
+    
+    
+
+            <nav id="recipeNavbar">
+                <ul>
+                    <li><button class="nav-btn" onclick="filterRecipes('all')">All</button></li>
+                    <li><button class="nav-btn" onclick="filterRecipes('vegetarian')">Vegetarian</button></li>
+                    <li><button class="nav-btn" onclick="filterRecipes('non-veg')">Non-Veg</button></li>
+                    <li><button class="nav-btn" onclick="filterRecipes('vegan')">Vegan</button></li>
+ 
+                </ul>
+            </nav>
+            
+        </ul>
+    </nav>
+
+    <!-- Quick Recipes Section -->
+    <div id="quickRecipes">
+        <div class="recipe-card vegetarian" data-video-id="Maea522O0Rw">
+            <img src="https://img.youtube.com/vi/Maea522O0Rw/maxresdefault.jpg" alt="Vegeterian Recipe">
+            <h3>Mushroom Recipe</h3>
+            <p>Click to watch on YouTube!</p>
+            <a href="https://www.youtube.com/watch?v=Maea522O0Rw&list=PLKt7-6KeYU8xeGAMC6KZHFT839Kpkj2El&index=5" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+        
+
+        <div class="recipe-card non-veg">
+            <img src="https://img.youtube.com/vi/EiGAyfLLy30/maxresdefault.jpg" alt="Non-Vegetarian Recipe">
+            <h3>Chicken fried rice</h3>
+            <p>Hearty non-vegetarian meal</p>
+            <a href="https://www.youtube.com/watch?v=EiGAyfLLy30" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+        
+
+        <div class="recipe-card vegan">
+            <img src="https://img.youtube.com/vi/1EpfvEz-91Q/maxresdefault.jpg" alt="Non-Vegetarian Recipe">
+            <h3>Budget friendly meal prep</h3>
+            <p>Heart vegan meal</p>
+            <a href="https://www.youtube.com/watch?v=1EpfvEz-91Q" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+
+        <div class="recipe-card vegetarian" data-video-id="Maea522O0Rw">
+            <img src="https://img.youtube.com/vi/AhoZ2TbLxzU/maxresdefault.jpg" alt="Vegeterian Recipe">
+            <h3>Quesadilla</h3>
+            <p>Click to watch on YouTube!</p>
+            <a href="https://www.youtube.com/watch?v=AhoZ2TbLxzU" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+
+        <div class="recipe-card non-veg">
+            <img src="https://img.youtube.com/vi/abSjD1p-rUg/maxresdefault.jpg" alt="Non-Vegetarian Recipe">
+            <h3>Chicken Sandwich</h3>
+            <p>Hearty non-vegetarian meal</p>
+            <a href="https://www.youtube.com/watch?v=abSjD1p-rUg" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+
+        <div class="recipe-card vegan">
+            <img src="https://img.youtube.com/vi/i7grGgKZqio/maxresdefault.jpg" alt="Non-Vegetarian Recipe">
+            <h3>Pasta Recipe</h3>
+            <p>Vegan Dish!</p>
+            <a href="https://www.youtube.com/watch?v=i7grGgKZqio" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+       
+        <div class="recipe-card dessert vegan">
+            <img src="https://img.youtube.com/vi/eMxJX_rrPeE/maxresdefault.jpg" alt="Dessert">
+            <h3>Sponge cake(vegan)</h3>
+            <p>Quick & easy dessert in a mug!</p>
+            <a href="https://www.youtube.com/watch?v=eMxJX_rrPeE" target="_blank">
+                <button>Watch Video</button>
+            </a>
+        </div>
+        
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+
+                if (menu.classList.contains("active")) {
+                    menu.classList.remove("active");
+                    document.removeEventListener("click", closeMenuOnClickOutside);
+                } else {
+                    menu.classList.add("active");
+                    setTimeout(() => {
+                        document.addEventListener("click", closeMenuOnClickOutside);
+                    }, 0);
+                }
+            }
+
+            function closeMenuOnClickOutside(event) {
+                const menu = document.getElementById("navMenu");
+                const hamburger = document.querySelector(".hamburger");
+
+                if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    menu.classList.remove("active");
+                    document.removeEventListener("click", closeMenuOnClickOutside);
+                }
+            }
+        // Function to filter recipes based on dietary preference
+        function filterRecipes(category) {
+            const allRecipes = document.querySelectorAll('.recipe-card');
+            
+            // Show all recipes if 'all' is selected, or filter by category
+            allRecipes.forEach(recipe => {
+                if (category === 'all') {
+                    recipe.classList.remove('hidden');
+                } else if (recipe.classList.contains(category)) {
+                    recipe.classList.remove('hidden');
+                } else {
+                    recipe.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initially show all recipes
+        filterRecipes('all');
+
+
+        function openGamePopup() {
+    document.getElementById('gamePopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closeGamePopup() {
+    document.getElementById('gamePopup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+const veganButton = document.getElementById('vegan-btn');
+const dessertButton = document.getElementById('dessert-btn');
+const drinksButton = document.getElementById('drinks-btn');
+
+const foodItems = document.querySelectorAll('.food-item');
+
+veganButton.addEventListener('click', () => {
+    filterFoodItems('vegan');
+});
+
+dessertButton.addEventListener('click', () => {
+    filterFoodItems('dessert');
+});
+
+drinksButton.addEventListener('click', () => {
+    filterFoodItems('drink');
+});
+
+function filterFoodItems(category) {
+    foodItems.forEach(item => {
+        if (item.classList.contains(category)) {
+            item.classList.remove('hidden');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+}
+
+    </script>
+
+</body>
+</html>
+

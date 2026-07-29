@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Meal Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #062d17;
+            --green-light: #0a1d05;
+            --background: #FAFAF8;
+            --text-color: #000000;
+            --nav-bg: rgba(31, 54, 11, 0.265);
+            --button-bg: #313611;
+            --button-hover-bg: #6e691e;
+            --button-color: #ecece4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .hamburger {
+    position: fixed;
+    top: 30px;
+    left: 10px;
+    font-size: 3.5em;
+    z-index: 1000; 
+    background: none;
+    border: none;
+    color: white;
+    margin: 0; 
+    padding: 0; 
+}
+
+
+.nav-menu {
+    position: absolute;
+    top: 70px; 
+    left: 10px;
+    z-index: 1000;
+    background: #506029;  
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    border-radius: 10px;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    width: 180px; 
+}
+
+.nav-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-menu a {
+    color: #f0f8f0; 
+    text-decoration: none; 
+    padding: 10px 0; 
+    font-size: 1.1em; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+.nav-menu a.active-link {
+    background-color: #e1e07f; 
+    color: #364908;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 8px 10px;
+}
+
+.nav-menu a:last-child {
+    border-bottom: none; 
+}
+
+.nav-menu a:hover {
+    opacity: 0.8; 
+}
+
+        body {
+            background-image: url('generator 2.jpg'); 
+            background-size: cover;
+            background-position: top;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            height: 100vh;
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        
+
+        
+       
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 3em;
+            color: #e6ebde;
+            font-weight: bold;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #e6ebde;
+            font-weight: bold;
+        }
+
+        h3 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #213009;
+            font-weight: bold;
+        }
+
+        .week-input {
+            font-size: 1.2rem;
+            padding: 8px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            width: 250px;
+            text-align: center;
+            background: #d6c76f;
+            color: #091001;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%; 
+            max-width: 1000px; 
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(235, 240, 216, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        th, td {
+            border: 1px solid var(--green-dark);
+            padding: 15px; 
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        th {
+            background: var(--green-light);
+            color: #ffffff;
+        }
+
+        td input {
+            width: 90%;
+            padding: 12px; 
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            background: transparent;
+            color: #09360b;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        td input::placeholder {
+            color: #304712;
+            opacity: 1;
+        }
+
+        /* Mobile-specific adjustments */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    table {
+        display: block; 
+        overflow-x: auto;
+    }
+
+    th, td {
+        padding: 10px; 
+        font-size: 1rem; 
+    }
+
+    td input {
+        width: 80%; 
+        font-size: 0.9rem;
+        padding: 10px; 
+    }
+
+    .meal-planner-container {
+        padding: 10px;
+    }
+
+    /* Hide the Snacks column on mobile */
+    th:nth-child(5), td:nth-child(5) {
+        display: none;
+    }
+
+    /* Adjust the table layout to be more mobile-friendly */
+    table, tr, th, td {
+        display: block;
+    }
+
+    tr {
+        margin-bottom: 15px;
+    }
+
+    th, td {
+        display: block;
+        text-align: right;
+        padding-right: 20px;
+        border: none;
+        border-bottom: 1px solid var(--green-dark);
+    }
+
+    th {
+        background-color: var(--green-light);
+        color: #ffffff;
+    }
+
+    td::before {
+        content: attr(data-label); 
+        font-weight: bold;
+        text-align: left;
+        display: block;
+    }
+
+    td {
+        padding-left: 0;
+        padding-bottom: 10px;
+    }
+}
+
+        button {
+            background-color: var(--button-bg);
+            color: var(--button-color);
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        /* Shopping List */
+        .shopping-list-container, .recipe-storage-container {
+            margin-top: 40px;
+            width: 80%;
+            max-width: 1100px;
+            background: rgba(213, 217, 200, 0.851);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            opacity: 1; 
+        }
+
+        .shopping-list-container ul, .recipe-storage-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .shopping-list-container li, .recipe-storage-container li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #5d7648;
+            color: #eeede5;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shopping-list-container button, .recipe-storage-container button {
+            margin-top: 10px;
+        }
+
+        .shopping-input, .recipe-input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 75%;
+            margin-right: 10px;
+        }
+
+        .shopping-input::placeholder, .recipe-input::placeholder {
+            color: #6d8b45;
+        }
+
+        .recipe-input {
+            height: 150px;
+            font-size: 1.1rem;
+        }
+        .game-float-button {
+    position: fixed;
+    top: 20px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.circle-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #4d2c6d; /* Purple */
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.circle-icon:hover {
+    transform: scale(1.1);
+    background-color: #4d2c6d; /* Purple */
+}
+
+/* Game Popup Styles */
+#gamePopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 800px;
+  height: 100vh;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Close Button Bar */
+.close-btn-bar {
+  display: flex;
+  justify-content: flex-end;
+  background: #364908;
+  padding: 10px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.close-btn-bar button {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Iframe for Game */
+.game-iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    #gameCanvas {
+        width: 60%;
+        height: auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div> <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <div class="nav-menu" id="navMenu">
+        <a href="about.html">Homepage</a>
+        <a href="recipes.html">Quick Recipes</a>
+        <a href="thestudentpantry.html">Recipe Generate</a>
+        <a href="studentnotepad.html"class="active-link">Meal Planner</a>
+        <a href="studentchat.html">Student Chat</a>
+    </div>
+
+    <button id="waitGameButton" class="game-float-button" onclick="openGamePopup()">
+        <img src="game1.png" alt="Play Game" class="circle-icon">
+    </button>
+    
+    <div id="gamePopup">
+        <div class="close-btn-bar">
+          <button onclick="closeGamePopup()">✖</button>
+        </div>
+    
+        <iframe src="shark.html" class="game-iframe"></iframe>
+      </div>
+      <div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;" onclick="closeGamePopup()"></div>
+
+
+    
+    
+    
+
+    <!-- Meal Planner Content -->
+    <div class="meal-planner-container">
+        <h1>The Student Pantry</h1>
+        <h2>Plan, Save and Add your ingredients and recipes!</h2>
+        <p> <input type="text" class="week-input" placeholder="Enter date range..."></p>
+
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Breakfast</th>
+                <th>Lunch</th>
+                <th>Dinner</th>
+                <th>Snacks</th>
+            </tr>
+            <script>
+                let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                days.forEach(day => {
+                    document.write(`<tr>
+                        <td>${day}</td>
+                        <td><input type="text" placeholder="Enter ..."></td>
+                        <td><input type="text" placeholder="Enter ..."></td>
+                        <td><input type="text" placeholder="Enter ..."></td>
+                        <td><input type="text" placeholder="Enter ..."></td>
+                    </tr>`);
+                });
+            </script>
+        </table>
+
+        <button>Save Meal Plan</button>
+    </div>
+
+    <!-- Shopping List Section -->
+    <div class="shopping-list-container">
+        <h3>Shopping List</h3>
+        <input type="text" class="shopping-input" id="shoppingItem" placeholder="Add an item...">
+        <button onclick="addShoppingItem()">Add Item</button>
+        <ul id="shoppingList"></ul>
+    </div>
+
+    <!-- Recipe Storage Section -->
+    <div class="recipe-storage-container">
+        <h3>Recipe Storage</h3>
+        <textarea class="recipe-input" id="recipeInput" placeholder="Enter your recipe here..."></textarea>
+        <button onclick="saveRecipe()">Save Recipe</button>
+        <ul id="recipeList"></ul>
+    </div>
+
+  
+
+    <script>
+        function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+
+                if (menu.classList.contains("active")) {
+                    menu.classList.remove("active");
+                    document.removeEventListener("click", closeMenuOnClickOutside);
+                } else {
+                    menu.classList.add("active");
+                    setTimeout(() => {
+                        document.addEventListener("click", closeMenuOnClickOutside);
+                    }, 0);
+                }
+            }
+
+            function closeMenuOnClickOutside(event) {
+                const menu = document.getElementById("navMenu");
+                const hamburger = document.querySelector(".hamburger");
+
+                if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    menu.classList.remove("active");
+                    document.removeEventListener("click", closeMenuOnClickOutside);
+                }
+            }
+            
+        // Shopping List Functionality
+        function addShoppingItem() {
+            const item = document.getElementById("shoppingItem").value.trim();
+            if (item) {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `${item} <button onclick="removeShoppingItem(this)">Remove</button>`;
+                document.getElementById("shoppingList").appendChild(listItem);
+                document.getElementById("shoppingItem").value = '';
+            }
+        }
+
+        function removeShoppingItem(button) {
+            button.parentElement.remove();
+        }
+
+        // Recipe Storage Functionality
+        function saveRecipe() {
+            const recipe = document.getElementById("recipeInput").value.trim();
+            if (recipe) {
+                const listItem = document.createElement("li");
+                listItem.textContent = recipe;
+                document.getElementById("recipeList").appendChild(listItem);
+                document.getElementById("recipeInput").value = '';
+            }
+        }
+
+        function openGamePopup() {
+    document.getElementById('gamePopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closeGamePopup() {
+    document.getElementById('gamePopup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+        </script>
+
+
+        
+    </script>
+</body>
+</html>

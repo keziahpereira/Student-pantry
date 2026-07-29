@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipe Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing styles */
+    </style>
+</head>
+<body>
+    <h1>Recipe Results</h1>
+    <div id="results">
+        <!-- Recipe results will appear here -->
+    </div>
+
+    <script>
+      window.onload = function() {
+    // Get the ingredient from the query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const ingredient = urlParams.get('q');
+    const resultsDiv = document.getElementById('results');
+    
+    // Check if the ingredient exists
+    if (ingredient) {
+        fetch(`http://localhost:3000/recipes?q=${encodeURIComponent(ingredient)}`)
+            .then(response => response.json())
+            .then(data => {
+                resultsDiv.innerHTML = ''; // Clear any previous results
+
+                if (data.length > 0) {
+                    // Display each recipe
+                    data.forEach(recipe => {
+                        const resultElement = document.createElement('div');
+                        resultElement.innerHTML = `
+                            <h3>${recipe.title}</h3>
+                            <p><strong>Ingredients:</strong> ${recipe.ingredients.join(', ')}</p>
+                            <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+                        `;
+                        resultsDiv.appendChild(resultElement);
+                    });
+                } else {
+                    resultsDiv.innerHTML = 'No recipes found for this ingredient.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultsDiv.innerHTML = 'An error occurred while fetching the recipes.';
+            });
+    } else {
+        resultsDiv.innerHTML = 'No ingredient was provided.';
+    }
+};
+
+    </script>
+</body>
+</html>

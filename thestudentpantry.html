@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Student Pantry - Recipe Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta name="description" content="The Student Pantry - helping students make meals from ingredients they already have!">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+/* Corrected with Chat gpt */
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url('generator 2.jpg'); 
+            background-size: cover;
+            color: #20441c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+             transition: background 0.5s ease-in-out;
+        }
+
+        .hamburger {
+    position: fixed;
+    top: 30px;
+    left: 10px;
+    font-size: 3.5em;
+    z-index: 1100; 
+    background: none;
+    border: none;
+    color: white;
+    margin: 0; 
+    padding: 0; }
+
+
+.nav-menu {
+    
+    position: fixed;
+    top: 70px; 
+    left: 10px;
+    z-index: 1000;
+    background: #506029;  
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    border-radius: 10px;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+}
+
+.nav-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.nav-menu a.active-link {
+    background-color: #e1e07f; 
+    color: #364908; 
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px 50px;
+}
+
+
+.nav-menu a {
+    color: #f0f8f0; 
+    text-decoration: none; 
+    padding: 10px 0; 
+    font-size: 1.1em; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+}
+
+.nav-menu a:last-child {
+    border-bottom: none; 
+}
+
+.nav-menu a:hover {
+    opacity: 0.8; 
+}
+
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;  
+             min-height: 400px;  
+            height: 200vh;
+            width: 100%;
+            margin-top: 2200px;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #e6ebde;
+        }
+
+        .generator-container {
+            background: rgba(218, 226, 185, 0.8);
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 80%;
+            padding: 15px;
+            border: 2px solid #d9e2c7;
+            border-radius: 50px;
+            font-size: 1.2em;
+            max-width: 400px;
+            background-color: #e9ebd0;
+            color: #0a430c;
+        }
+
+        button {
+            background-color: #586027;
+            color: #ecece4;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6e691e;
+        }
+
+
+  .white-section {
+    background-color: rgb(221, 237, 209);
+    z-index: -1; 
+    padding: 60px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.white-section h2 {
+    font-size: 2.5em;
+    color: #20441c;
+    margin-bottom: 20px;
+}
+
+.white-section p {
+    font-size: 1.2em;
+    color: #444;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.button-item {
+    background: rgb(42, 60, 6);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 45%;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.button-item:hover {
+    transform: translateY(-10px);
+}
+
+.button-img {
+    width: 100%;  
+    height: auto; 
+    object-fit: contain; 
+    border-radius: 10px 10px 0 0; 
+    margin-bottom: 10px;
+}
+
+.button-text {
+    font-size: 1.1em;
+    color: #e4ece3 !important;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.button-item a {
+    display: block;
+    text-decoration: none;  
+    color: inherit;  
+}
+
+.button-item a:hover {
+    transform: translateY(-10px); 
+}
+
+.about-btn {
+  background-color: #f9c74f; 
+}
+
+.recipes-btn {
+  background-color: #90be6d;
+}
+
+.planner-btn {
+  background-color: #577590; 
+}
+
+.chat-btn {
+  background-color: #f9844a; 
+}
+
+
+.button-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.button-text {
+  padding: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+    .button-item {
+        width: 100%;
+    }
+}
+
+.game-float-button {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.circle-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #4d2c6d; /* Purple */
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.circle-icon:hover {
+    transform: scale(1.1);
+    background-color: #4d2c6d; /* Purple */
+}
+
+/* Game Popup Styles */
+#gamePopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 800px;
+  height: 100vh;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Close Button Bar */
+.close-btn-bar {
+  display: flex;
+  justify-content: flex-end;
+  background: #364908;
+  padding: 10px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.close-btn-bar button {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Iframe for Game */
+.game-iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    #gameCanvas {
+        width: 60%;
+        height: auto;
+    }
+}
+.recipe-container {
+    background-color: #f4f4f4; 
+    border: 2px solid #ccc;  
+    padding: 20px;            
+    margin: 20px 0;           
+    border-radius: 8px;      
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.recipe-title {
+    color: #2c3e50;   
+    font-weight: bold; 
+    font-size: 2em;  
+    margin-bottom: 10px;
+}
+
+.recipe-ingredients, .recipe-instructions {
+    color: #34495e;  
+    font-size: 1.1em; 
+}
+
+.recipe-ingredients strong, .recipe-instructions strong {
+    color: #e74c3c;  
+}
+
+#resultsDiv.innerHTML {
+    font-weight: bold; 
+    color: #ff6600; 
+    text-decoration: none; }
+
+#results {
+    margin-top: 50px;
+    padding: 1px;
+    background-color: rgba(236, 245, 230, 0.9);
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    color: #20441c;
+    font-size: 1.2em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#results a {
+    color: #3b6f3b;
+    font-weight: bold;
+    text-decoration: underline;
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+#results p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
+<div class="nav-menu" id="navMenu">
+    <a href="about.html">Homepage</a>
+        <a href="recipes.html" >Quick Recipes</a>
+        <a href="thestudentpantry.html"class="active-link">Recipe Generate</a>
+        <a href="studentnotepad.html">Meal Planner</a>
+        <a href="studentchat.html">Student Chat</a>
+</div>
+
+   <button id="waitGameButton" class="game-float-button" onclick="openGamePopup()">
+    <img src="game1.png" alt="Play Game" class="circle-icon">
+</button>
+
+<div id="gamePopup">
+    <div class="close-btn-bar">
+      <button onclick="closeGamePopup()">✖</button>
+    </div>
+
+    <iframe src="shark.html" class="game-iframe"></iframe>
+  </div>
+
+<div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999;" onclick="closeGamePopup()"></div>
+
+
+    
+
+
+<div class="main-container">
+    <h1>The Student Pantry</h1>
+    <div class="generator-container">
+        <input type="text" id="ingredientInput" placeholder="Type ingredient and press Enter">
+        <button onclick="performSearch()">Find Recipe</button>
+    </div>
+    <div id="results"></div> 
+</div>
+
+
+
+
+
+
+    <div class="white-section">
+        <h2>How It Works?</h2>
+        <img src="infographic1.png" alt="Student Pantry Infographic" style="width: 100%; max-width: 700px; display: block; margin: 20px auto 40px auto;">
+<h2>We're here to help</h2>
+
+
+        <div class="button-container">
+            <div class="button-item">
+
+                <a href="about.html">
+                    <img src="aboutimage.jpg" alt="About info" class="button-img">
+                    <p class="button-text">Homepage</p>
+                </a>
+            </div>
+
+            <div class="button-item">
+                <a href="recipes.html">
+                    <img src="recipesrec.jpg" alt="Image 2" class="button-img">
+                    <p class="button-text">Quick Recipes</p>
+                </a>
+            </div>
+
+            <div class="button-item">
+                <a href="studentnotepad.html">
+                    <img src="mealplan1.png" alt="Image 2" class="button-img">
+                    <p class="button-text">Meal Planner</p>
+                </a>
+            </div>
+
+            <div class="button-item">
+                <a href="studentchat.html">
+                    <img src="studentchat.jpg" alt="Image 2" class="button-img">
+                    <p class="button-text">Community Forum</p>
+                </a>
+            </div>
+        </div>
+
+
+
+        <script>
+
+
+function toggleMenu() {
+    const menu = document.getElementById("navMenu");
+    const hamburger = document.querySelector(".hamburger");
+
+    const isActive = menu.classList.contains("active");
+    menu.classList.toggle("active");
+    hamburger.setAttribute("aria-expanded", String(!isActive));
+
+    if (!isActive) {
+        setTimeout(() => {
+            document.addEventListener("click", closeMenuOnClickOutside);
+        }, 0);
+    } else {
+        document.removeEventListener("click", closeMenuOnClickOutside);
+    }
+}
+
+            function closeMenuOnClickOutside(event) {
+                const menu = document.getElementById("navMenu");
+                const hamburger = document.querySelector(".hamburger");
+
+                if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    menu.classList.remove("active");
+                    document.removeEventListener("click", closeMenuOnClickOutside);
+                }
+            }
+
+            function openGamePopup() {
+    document.getElementById('gamePopup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closeGamePopup() {
+    document.getElementById('gamePopup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+        </script>
+
+<script>
+    async function performSearch() {
+        const ingredient = document.getElementById('ingredientInput').value;
+        const resultsDiv = document.getElementById('results');
+    
+        if (!ingredient) {
+            resultsDiv.innerHTML = '<p>Please enter some ingredients!</p>';
+            return;
+        }
+
+        
+    
+        resultsDiv.innerHTML = '<p>Searching YouTube for recipes...</p>';
+    
+        const apiKey = 'AIzaSyDdA580dnQLxA2AOUevGffbLIV7RJZZlAc';  
+        const searchQuery = `${ingredient} recipe`;
+    
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&key=${apiKey}&maxResults=1`;
+    
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+    
+            if (data.items.length > 0) {
+                const videoId = data.items[0].id.videoId;
+                const videoTitle = data.items[0].snippet.title;
+                const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    
+                resultsDiv.innerHTML = `
+    <p>Here's a recipe video for <strong>${ingredient}</strong>:</p>
+    <a href="${videoUrl}" target="_blank">${videoTitle}</a>
+`;
+
+            } else {
+                resultsDiv.innerHTML = '<p>No recipe videos found. Try different ingredients!</p>';
+            }
+    
+        } catch (error) {
+            console.error(error);
+            resultsDiv.innerHTML = '<p>Error fetching recipe video.</p>';
+        }
+    }
+    </script>
+    
+<script>
+    
+    resultsDiv.innerHTML = '<p>Searching...</p>';
+
+    fetch(`http://localhost:3000/recipes?q=${encodeURIComponent(ingredient)}`)
+        .then(response => response.json())
+        .then(data => {
+            resultsDiv.innerHTML = ''; 
+
+            if (data.length > 0) {
+                data.forEach(recipe => {
+                    const resultElement = document.createElement('div');
+                    resultElement.innerHTML = `
+                        <h3>${recipe.title}</h3>
+                        <p><strong>Ingredients:</strong> ${recipe.ingredients.join(', ')}</p>
+                        <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+                        <hr>
+                    `;
+                    resultsDiv.appendChild(resultElement);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p>No recipes found for this ingredient.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            resultsDiv.innerHTML = '<p>An error occurred while fetching the recipes.</p>';
+        });
+
+
+</script>
+
+</script>
+
+
+</body>
+</html>
